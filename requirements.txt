@@ -1,0 +1,5 @@
+pandas==2.2.3
+plotly==6.1.1
+requests @ file:///C:/b/abs_c3508vg8ez/croot/requests_1731000584867/work
+streamlit==1.45.1
+
