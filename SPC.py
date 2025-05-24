@@ -78,10 +78,10 @@ for maquina in maquinas_seleccionadas:
     if maquina not in st.session_state:
         st.session_state[maquina] = {'ultimaFecha': None, 'enAlerta': False}
 
-# Fragmento por máquina
-for maquina in maquinas_seleccionadas:
+# Función para mostrar cada fragmento de máquina de forma segura
+def mostrar_maquina_fragment(maquina):
     @st.fragment(run_every=parSegundosActualizacion)
-    def MostrarMaquina(maquina=maquina):
+    def fragment():
         try:
             df = cargar_datos()
             df_maquina = df[df['Maquina'] == maquina].sort_values("FechaHora").tail(parVentanaDatos)
@@ -115,7 +115,12 @@ for maquina in maquinas_seleccionadas:
         except Exception as e:
             st.error(f"Error en la máquina {maquina}: {e}")
 
-    MostrarMaquina()
+    fragment()
+
+# Mostrar fragmento por cada máquina seleccionada
+for maquina in maquinas_seleccionadas:
+    mostrar_maquina_fragment(maquina)
+
 
 
 
